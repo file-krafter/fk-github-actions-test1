@@ -11,7 +11,7 @@ jobs:
         python-version: [3.8, 3.9]  # Test multiple Python versions
 
     steps:
-    - name: Checkout Repository
+    - name: Checkout Repository  # Fetch the correct branch
       uses: actions/checkout@v4
       with:
         ref: main  # Ensures GitHub Actions fetches the 'main' branch
@@ -21,17 +21,23 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
 
+    - name: Debug Python Setup  # Print Python version and path before installing dependencies
+      run: |
+        python --version
+        pip --version
+        which python
+
     - name: Install dependencies  # Install required Python packages
       run: |
-        python -m pip install --upgrade pip
-        pip install pytest
+        python -m pip install --upgrade pip --no-cache-dir
+        pip install pytest --no-cache-dir
 
     - name: Run tests  # Run tests using pytest
       run: |
         cd src  # Navigate to the source directory
         python -m pytest addition.py
 
-    - name: Debug Python Setup  # Print Python version and path
+    - name: Debug Post-Test Python Setup  # Verify Python and pip version after updates
       run: |
         python --version
-        which python
+        pip --version
