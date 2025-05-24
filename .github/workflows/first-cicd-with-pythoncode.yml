@@ -11,7 +11,10 @@ jobs:
         python-version: [3.8, 3.9]  # Test multiple Python versions
 
     steps:
-    - uses: actions/checkout@v4  # Checkout the repository code
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+      with:
+        ref: main  # Ensures GitHub Actions fetches the 'main' branch
 
     - name: Set up Python  # Install Python based on the matrix
       uses: actions/setup-python@v4
