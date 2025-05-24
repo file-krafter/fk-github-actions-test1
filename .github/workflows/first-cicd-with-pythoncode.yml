@@ -41,6 +41,3 @@ jobs:
       run: |
         python --version
         pip --version
-
-    - name: Extend Timeout to Avoid Cancellation  # Ensures the job doesn't fail due to timeout
-      timeout-minutes: 30  # Adjust as needed
